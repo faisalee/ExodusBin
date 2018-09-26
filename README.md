@@ -88,9 +88,9 @@ Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.2+13, mixed mode)
 
 - For Windows, edit the `exec` script and modify the CLASSPATH to point to your `bin/resources` folder depending on where you extracted the ZIP file.
 
-*remember to keep the first dot `.` in the classpath as it points back to your current path.*
+*remember to keep the first dot `.` in the CLASSPATH as it needs to points back to your current path.*
 
-Make sure `java -version` works for your session and ten execute the either of the above two scripts depending on your environment.
+Make sure `java -version` works for your session and then execute either of the above two scripts depending on your environment.
 
 This script can run from a third machine which has access to both MySQL and MariaDB databases.
 
