@@ -74,3 +74,23 @@ Other important paramneters
 *One important thing to take note is, don't select MySQL internal tables and databases for migration for instance `mysql`, `sys` etc.!*
 
 #### Exodus Execution
+
+You will need Java JRE 8 or higher to run this, I am using Java 10.0.2 
+
+```
+C:\> java -version
+java version "10.0.2" 2018-07-17
+Java(TM) SE Runtime Environment 18.3 (build 10.0.2+13)
+Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.2+13, mixed mode)
+```
+
+- For Windows, edit the `WindowsExec.cmd` script and modify the CLASSPATH to point to your `bin\resources` folder depending on where you extracted the ZIP file.
+
+- For Windows, edit the `exec` script and modify the CLASSPATH to point to your `bin/resources` folder depending on where you extracted the ZIP file.
+
+*remember to keep the first dot `.` in the classpath as it points back to your current path.*
+
+Make sure `java -version` works for your session and ten execute the either of the above two scripts depending on your environment.
+
+This script can run from a third machine which has access to both MySQL and MariaDB databases.
+
