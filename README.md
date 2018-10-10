@@ -46,6 +46,9 @@ Edit the /bin/Exodus.properties file and modify the following section as needed.
 # ThreadCount is for parallel Table loading, each thread will take care of ONE table.
 ThreadCount=1
 
+TargetDB=MariaDB
+TargetConnectParams=useUnicode=yes&characterEncoding=utf8&useBatchMultiSend=true&useServerPrepStmts=false&rewriteBatchedStatements=true
+
 ##Paths with reference to the current folder. Do not use "/" at the end of the path
 #LogPath=/home/faisal/Work/Java/Exodus/src/logs
 #DDLPath=/home/faisal/Work/Java/Exodus/src/ddl
@@ -55,9 +58,19 @@ ThreadCount=1
 LogPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\logs
 DDLPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\ddl
 ExportPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\export
+
+#WHERE Clause Additional Criteria, following is an Example
+SCHEMANAME.TABLENAME.WHERECriteria = COL1 = 74196328 AND COL2 LIKE 'SOMETHING%'
+
+#Additional Criteria like LIMIT or ORDER BY etc., following is an Example
+SCHEMANAME.TABLEname.AdditionalCriteria = LIMIT 13
 ```
 
 For first time, change the `DryRun=NO` to `YES` so that we can be sure of our setup.
+
+The TargetConnectParams has now `rewriteBatchedStatements` this will rewrite bulk statements automatically for faster writes!
+
+`WHERECriteria` and `AdditionalCriteria` have been added to take care of extra WHERE clause for individual tables and additional expression like `ORDER BY` or `LIMIT n`
 
 Other important paramneters
 
