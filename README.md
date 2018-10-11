@@ -47,7 +47,8 @@ Edit the /bin/Exodus.properties file and modify the following section as needed.
 ThreadCount=1
 
 TargetDB=MariaDB
-TargetConnectParams=useUnicode=yes&characterEncoding=utf8&useBatchMultiSend=true&useServerPrepStmts=false&rewriteBatchedStatements=true
+TargetConnectParams=useUnicode=yes&characterEncoding=utf8&rewriteBatchedStatements=true
+#useBatchMultiSend=true&useServerPrepStmts=false&
 
 ##Paths with reference to the current folder. Do not use "/" at the end of the path
 #LogPath=/home/faisal/Work/Java/Exodus/src/logs
@@ -68,7 +69,7 @@ SCHEMANAME.TABLEname.AdditionalCriteria = LIMIT 13
 
 For first time, change the `DryRun=NO` to `YES` so that we can be sure of our setup.
 
-The TargetConnectParams has now `rewriteBatchedStatements` this will rewrite bulk statements automatically for faster writes!
+The TargetConnectParams has now `rewriteBatchedStatements` this will rewrite bulk statements automatically for much faster writes!
 
 `WHERECriteria` and `AdditionalCriteria` have been added to take care of extra WHERE clause for individual tables and additional expression like `ORDER BY` or `LIMIT n`
 
