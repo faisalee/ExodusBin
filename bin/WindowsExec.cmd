@@ -10,6 +10,6 @@ mkdir export>nul 2>nul
 copy *.jar resources>nul 2>nul
 copy *.xml resources>nul 2>nul
 copy *.properties resources>nul 2>nul
-cls
+
 @echo on
 java -Xms6196m -Xmx10240m mariadb.migration.Exodus
