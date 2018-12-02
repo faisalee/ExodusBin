@@ -65,11 +65,16 @@ SCHEMANAME.TABLENAME.WHERECriteria = COL1 = 74196328 AND COL2 LIKE 'SOMETHING%'
 
 #Additional Criteria like LIMIT or ORDER BY etc., following is an Example
 SCHEMANAME.TABLEname.AdditionalCriteria = LIMIT 13
+
+#Create (YES/NO) for Additional Objects while Migrating
+CreateViews=YES
+CreatePLSQL=YES
+CreateTriggers=YES
 ```
 
 For first time, change the `DryRun=NO` to `YES` so that we can be sure of our setup.
 
-The TargetConnectParams has now `rewriteBatchedStatements` this will rewrite bulk statements automatically for much faster writes!
+The TargetConnectParams has now `rewriteBatchedStatements=true` this will rewrite bulk statements automatically for much faster writes!
 
 `WHERECriteria` and `AdditionalCriteria` have been added to take care of extra WHERE clause for individual tables and additional expression like `ORDER BY` or `LIMIT n`
 
@@ -84,6 +89,12 @@ Other important paramneters
     - `TablesToMigrate = TABLE_NAME LIKE '%'`
 - `SkipTableMigration`
   - This defines the list of tables that you want to skip from the Migration process, this only useful if you have specify "%" for `TablesToMigrate`
+- `CreateViews`
+  - YES/NO will decide if Views will be migrated or not.
+- `CreatePLSQL`
+  - YES/NO will decide if PL/SQL (Stored Procedures / Stored Functions) will be migrated or not.
+- `CreateTriggers`
+  - YES/NO will decide if Triggers will be migrated or not.
 
 *One important thing to take note is, don't select MySQL internal tables and databases for migration for instance `mysql`, `sys` etc.!*
 
