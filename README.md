@@ -66,10 +66,16 @@ SCHEMANAME.TABLENAME.WHERECriteria = COL1 = 74196328 AND COL2 LIKE 'SOMETHING%'
 #Additional Criteria like LIMIT or ORDER BY etc., following is an Example
 SCHEMANAME.TABLEname.AdditionalCriteria = LIMIT 13
 
+#This dictates if Table structure and data migration will be done, use NO to skip
+MigrateData=YES
+
 #Create (YES/NO) for Additional Objects while Migrating
 CreateViews=YES
 CreatePLSQL=YES
 CreateTriggers=YES
+
+#This dictates of user Grants will be migrated or not, use NO to skip Grants migration
+UserGrants=YES
 ```
 
 For first time, change the `DryRun=NO` to `YES` so that we can be sure of our setup.
@@ -95,6 +101,10 @@ Other important paramneters
   - YES/NO will decide if PL/SQL (Stored Procedures / Stored Functions) will be migrated or not.
 - `CreateTriggers`
   - YES/NO will decide if Triggers will be migrated or not.
+- `UserGrants`
+  - YES/NO will decide if User Grants will be migrated or not.
+- `MigrateData`
+  - YES/NO will decide if Table's DDL and Data will be migrated or not.
 
 *One important thing to take note is, don't select MySQL internal tables and databases for migration for instance `mysql`, `sys` etc.!*
 
