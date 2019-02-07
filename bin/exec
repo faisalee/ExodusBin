@@ -6,4 +6,4 @@ mkdir -p resources
 
 cp *.jar *.xml *.properties resources
 
-java -Xms4196m -Xmx10240m mariadb.migration.Exodus
+java -Xms4196m -Xmx13240m mariadb.migration.Exodus
