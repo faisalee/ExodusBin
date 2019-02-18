@@ -50,15 +50,24 @@ TargetDB=MariaDB
 TargetConnectParams=useUnicode=yes&characterEncoding=utf8&rewriteBatchedStatements=true
 #useBatchMultiSend=true&useServerPrepStmts=false&
 
+#TransactionSize is the size of the Batch, COMMIT will be executed after each batch submission to the Database.
+TransactionSize=10000
+
+#This is only applicable for data migration, if set to YES, on a batch failure, the same batch will be re-tried in Single ROW mode (YES/NO)
+RetryOnErrors=YES
+
+#This will truncate the tables that were partially migrated previously, With this property enabled, migration can be re-run and it will continue from the last table (YES/NO)
+OverwritePartiallyMigratedTables=YES
+
 ##Paths with reference to the current folder. Do not use "/" at the end of the path
-#LogPath=/home/faisal/Work/Java/Exodus/src/logs
-#DDLPath=/home/faisal/Work/Java/Exodus/src/ddl
-#ExportPath=/home/faisal/Work/Java/Exodus/src/export
+LogPath=/home/faisal/Work/Java/Exodus/src/logs
+DDLPath=/home/faisal/Work/Java/Exodus/src/ddl
+ExportPath=/home/faisal/Work/Java/Exodus/src/export
 
 #Path for Windows
-LogPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\logs
-DDLPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\ddl
-ExportPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\export
+#LogPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\logs
+#DDLPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\ddl
+#ExportPath=C:\\Users\\faisa\\OneDrive\\Work\\Java\\Exodus\\src\\export
 
 #WHERE Clause Additional Criteria, following is an Example
 SCHEMANAME.TABLENAME.WHERECriteria = COL1 = 74196328 AND COL2 LIKE 'SOMETHING%'
@@ -86,8 +95,16 @@ The TargetConnectParams has now `rewriteBatchedStatements=true` this will rewrit
 
 Other important paramneters
 
+- `ThreadCount`
+  - Default is 1, this controls how many tables will be migrated in parallel.
+- `TransactionSize`
+  - Records will be sent to the MariaDB using batches, this parameter decides how many records in each batch. Commit/Rollback is done after each batch. In case of any errors while processing a batch, the entire batch will face a rollback.
+- `RetryOnErrors`
+  - In case of any error during the batch processing, if this parameter is set to YES, the batch will be re-processed in single transaction mode. This will force to write the successful records and only the records having problems will be rollbacked.
 - `UsersToMigrate`
-  - This is a SQL compatible syntax that defines which DB users are to be migrated
+  - This is a SQL compatible syntax that defines which DB users are to be migrated.
+- `OverwritePartiallyMigratedTables`
+  - In case migration process was broken or killed during a table was being migrated, That table will be marked as partially migrated. With this parameter set to YES, that table will be overwritten when the migration is re-run, else, the migration will throw failure errors.
 - `DatabaseToMigrate`
   - List of databases *Case Sensitive* to be migrated, again this is compatible with SQL syntax
 - `TablesToMigrate`
@@ -110,18 +127,18 @@ Other important paramneters
 
 #### Exodus Execution
 
-You will need Java JRE 8 or higher to run this, I am using Java 10.0.2 
+You will need Java JRE 8 or higher to run this, I am using Java 1.8.0_192
 
 ```
-C:\> java -version
-java version "10.0.2" 2018-07-17
-Java(TM) SE Runtime Environment 18.3 (build 10.0.2+13)
-Java HotSpot(TM) 64-Bit Server VM 18.3 (build 10.0.2+13, mixed mode)
+C:\>java -version
+java version "1.8.0_192"
+Java(TM) SE Runtime Environment (build 1.8.0_192-b12)
+Java HotSpot(TM) 64-Bit Server VM (build 25.192-b12, mixed mode)
 ```
 
 - For Windows, edit the `WindowsExec.cmd` script and modify the CLASSPATH to point to your `bin\resources` folder depending on where you extracted the ZIP file.
 
-- For Windows, edit the `exec` script and modify the CLASSPATH to point to your `bin/resources` folder depending on where you extracted the ZIP file.
+- For Linux/Mac, edit the `exec` script and modify the CLASSPATH to point to your `bin/resources` folder depending on where you extracted the ZIP file.
 
 *remember to keep the first dot `.` in the CLASSPATH as it needs to points back to your current path.*
 
