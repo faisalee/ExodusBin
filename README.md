@@ -1,7 +1,7 @@
 # ExodusBin
 Binaries for the Exodus (MySQL to MariaDB)
 
-Demo/Turorial: https://youtu.be/QFbfcIXoBo8
+Demo/Turorial: https://youtu.be/iuG8xhCUVEw
 
 #### Database Setup
 Download the entire bin folder as a ZIP using the "CLONE" function. Once downloaded edit /bin/dbdetails.xml with the connection details for both source and target databases. 
